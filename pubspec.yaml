@@ -10,7 +10,7 @@ dependencies:
   cupertino_icons:
   intl:
   timeago:
-  mono_kit:
+  mono_kit: ^0.14.0-dev
   provider:
   google_fonts:
   vsync_provider:
