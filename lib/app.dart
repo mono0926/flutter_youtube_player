@@ -22,7 +22,7 @@ class App extends StatelessWidget {
           darkTheme: buildDarkTheme(),
 //      themeMode: ThemeMode.dark,
           title: title,
-          home: const HomePage(),
+          home: HomePage.wrapped(),
           onGenerateRoute: Provider.of<Router>(context).onGenerateRoute,
           builder: (context, child) => TextScaleFactor(child: child),
         ),

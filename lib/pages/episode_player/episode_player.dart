@@ -114,14 +114,7 @@ class _Body extends StatelessWidget {
 }
 
 class _VideoRow extends StatelessWidget {
-  const _VideoRow({
-    Key key,
-    @required this.episode,
-    @required this.textTheme,
-  }) : super(key: key);
-
-  final Episode episode;
-  final TextTheme textTheme;
+  const _VideoRow({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
