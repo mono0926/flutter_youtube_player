@@ -9,6 +9,7 @@ class AppBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final notifier = context.watch<PlayerNotifier>();
     final expandingAnimation = notifier.expandingAnimation;
+
     return AnimatedBuilder(
       animation: expandingAnimation,
       builder: (context, child) => Align(

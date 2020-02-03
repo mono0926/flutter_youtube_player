@@ -46,10 +46,7 @@ class EpisodeCard extends StatelessWidget {
   Widget _buildTitle(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
-    return Text(
-      episode.title,
-      style: textTheme.bodyText1,
-    );
+    return Text(episode.title);
   }
 
   Widget _buildChannelIcon() {
