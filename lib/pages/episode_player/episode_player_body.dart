@@ -24,7 +24,11 @@ class EpisodePlayerBody extends StatelessWidget {
           children: <Widget>[
             IconButton(
               icon: Icon(Icons.thumb_up),
-              onPressed: () {},
+              onPressed: () => Scaffold.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Pressed'),
+                ),
+              ),
             ),
             IconButton(
               icon: Icon(Icons.thumb_down),
