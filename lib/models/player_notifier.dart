@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_youtube_player/theme.dart';
 
 // TODO(mono): 完全に隠れた方のアニメーションを無効化したり(Visibility+α)
-class PlayerNotifier implements Disposable {
-  PlayerNotifier({
+class PlayerAnimationManager implements Disposable {
+  PlayerAnimationManager({
     @required this.themeNotifier,
     @required this.tickerProvider,
   }) {

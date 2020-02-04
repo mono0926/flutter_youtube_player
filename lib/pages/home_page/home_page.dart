@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
       providers: [
         VsyncProvider(),
         DisposableProvider(
-          create: (context) => PlayerNotifier(
+          create: (context) => PlayerAnimationManager(
             themeNotifier: context.read(),
             tickerProvider: VsyncProvider.of(context),
           ),
@@ -77,14 +77,14 @@ class _FadeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final notifier = context.read<PlayerNotifier>();
+    final animation = context.read<PlayerAnimationManager>();
     return IgnorePointer(
       child: Stack(
         children: <Widget>[
           Positioned.fill(
             bottom: null,
             child: FadeTransition(
-              opacity: notifier.topFadeAnimation,
+              opacity: animation.topFadeAnimation,
               child: Container(
                 height: MediaQuery.of(context).padding.top,
                 color: Colors.black,
@@ -92,7 +92,7 @@ class _FadeScreen extends StatelessWidget {
             ),
           ),
           FadeTransition(
-            opacity: notifier.expandingAnimation.drive(_fadeTween),
+            opacity: animation.expandingAnimation.drive(_fadeTween),
             child: Container(color: Colors.black),
           ),
         ],

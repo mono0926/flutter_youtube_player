@@ -7,13 +7,13 @@ class AppBottomNavigationBar extends StatelessWidget {
   const AppBottomNavigationBar({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final notifier = context.watch<PlayerNotifier>();
+    final animation = context.watch<PlayerAnimationManager>();
 
     return AnimatedBuilder(
-      animation: notifier.expandingAnimation,
+      animation: animation.expandingAnimation,
       builder: (context, child) => Align(
         alignment: Alignment.topCenter,
-        heightFactor: 1 - notifier.expandingAnimation.value,
+        heightFactor: 1 - animation.expandingAnimation.value,
         child: child,
       ),
       child: BottomNavigationBar(

@@ -12,16 +12,16 @@ class EpisodePlayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-    final notifier = context.watch<PlayerNotifier>();
+    final animation = context.watch<PlayerAnimationManager>();
     final shrinkedBottom =
         mediaQuery.padding.bottom + _bottomBarHeight + _margin;
     final shrinkedTop =
         mediaQuery.size.height - shrinkedBottom - _bottomBarHeight;
     final topDistance = shrinkedTop - mediaQuery.padding.top;
     return AnimatedBuilder(
-      animation: notifier.expandingAnimation,
+      animation: animation.expandingAnimation,
       builder: (context, child) {
-        final expandedRatio = notifier.expandingAnimation.value;
+        final expandedRatio = animation.expandingAnimation.value;
         final top = shrinkedTop - topDistance * expandedRatio;
         final margin = (1 - expandedRatio) * _margin;
         final bottom = (1 - expandedRatio) * shrinkedBottom;
@@ -34,18 +34,18 @@ class EpisodePlayer extends StatelessWidget {
         );
       },
       child: GestureDetector(
-        onTap: notifier.expand,
+        onTap: animation.expand,
         onVerticalDragUpdate: (details) {
           final delta = -details.primaryDelta;
-          notifier.addExpandingAnimation(delta / topDistance);
+          animation.addExpandingAnimation(delta / topDistance);
         },
         onVerticalDragEnd: (details) {
           final threshold =
-              notifier.status == PlayerStatus.shrinked ? 0.3 : 0.7;
-          if (notifier.expandingAnimation.value > threshold) {
-            notifier.expand();
+              animation.status == PlayerStatus.shrinked ? 0.3 : 0.7;
+          if (animation.expandingAnimation.value > threshold) {
+            animation.expand();
           } else {
-            notifier.shrink();
+            animation.shrink();
           }
         },
         child: const _Home(),
@@ -58,7 +58,7 @@ class _Home extends StatelessWidget {
   const _Home({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final playerNotifier = context.watch<PlayerNotifier>();
+    final animation = context.watch<PlayerAnimationManager>();
     // Scaffoldで囲むとタップ効かなくなるがpadding無効化
     return MediaQuery.removePadding(
       context: context,
@@ -76,7 +76,7 @@ class _Home extends StatelessWidget {
                         const _Video(),
                         Expanded(
                           child: FadeTransition(
-                            opacity: playerNotifier.contentFadeAnimation,
+                            opacity: animation.contentFadeAnimation,
                             child: const EpisodePlayerBody(),
                           ),
                         ),
@@ -148,12 +148,12 @@ class _Video extends StatelessWidget {
   Widget build(BuildContext context) {
     final episodeNotifier = context.watch<EpisodeNotifier>();
     final episode = episodeNotifier.episode;
-    final notifier = context.watch<PlayerNotifier>();
+    final animation = context.watch<PlayerAnimationManager>();
     return AnimatedBuilder(
-      animation: notifier.expandingAnimation,
+      animation: animation.expandingAnimation,
       builder: (context, child) {
         return AspectRatio(
-          aspectRatio: _aspectTween.evaluate(notifier.expandingAnimation),
+          aspectRatio: _aspectTween.evaluate(animation.expandingAnimation),
           child: child,
         );
       },
