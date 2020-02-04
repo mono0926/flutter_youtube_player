@@ -29,6 +29,7 @@ class Episode {
       channel: const Channel(
         name: 'mono🐶',
         imageUrl: 'https://robohash.org/flutter',
+        subscriberCount: 128957,
       ),
     ),
     Episode(
@@ -42,6 +43,7 @@ class Episode {
       channel: const Channel(
         name: '未来完了形資産家JM',
         imageUrl: 'https://robohash.org/mono',
+        subscriberCount: 532,
       ),
     ),
     Episode(
@@ -55,6 +57,7 @@ class Episode {
       channel: const Channel(
         name: 'Gentil Donna',
         imageUrl: 'https://robohash.org/apple',
+        subscriberCount: 432,
       ),
     ),
   ];
@@ -65,7 +68,9 @@ class Channel {
   const Channel({
     @required this.name,
     @required this.imageUrl,
+    @required this.subscriberCount,
   });
   final String name;
   final String imageUrl;
+  final int subscriberCount;
 }

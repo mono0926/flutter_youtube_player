@@ -108,7 +108,122 @@ class _Body extends StatelessWidget {
               onPressed: () {},
             ),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              IconButton(
+                icon: Icon(Icons.thumb_up),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: Icon(Icons.thumb_down),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: Icon(Icons.share),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: Icon(Icons.cloud_download),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: Icon(Icons.save_alt),
+                onPressed: () {},
+              ),
+            ],
+          ),
+          Divider(),
+          Row(
+            children: <Widget>[
+              SizedBox(width: 16),
+              CircleAvatar(
+                backgroundImage: NetworkImage(episode.channel.imageUrl),
+              ),
+              SizedBox(width: 12),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(episode.channel.name),
+                  Text('${episode.channel.subscriberCount} subscribers'),
+                ],
+              ),
+              Spacer(),
+              FlatButton(
+                textTheme: ButtonTextTheme.primary,
+                child: Text('SUBSCRIBE'),
+                onPressed: () {},
+              ),
+            ],
+          ),
+          Divider(),
+          Row(
+            children: <Widget>[
+              SizedBox(width: 16),
+              Text('Up next'),
+              Spacer(),
+              Text('AutoPlay'),
+              Switch(
+                value: true,
+                onChanged: (value) {},
+              ),
+            ],
+          ),
+          _EpisodeTile(),
+          _EpisodeTile(),
+          _EpisodeTile(),
+          _EpisodeTile(),
+          _EpisodeTile(),
+          _EpisodeTile(),
         ],
+      ),
+    );
+  }
+}
+
+class _EpisodeTile extends StatelessWidget {
+  const _EpisodeTile({Key key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    final episode = Episode.example[1];
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 8,
+        horizontal: 16,
+      ),
+      child: AspectRatio(
+        aspectRatio: 4,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            AspectRatio(
+              aspectRatio: 16 / 9,
+              child: Image.network(episode.thumbnailUrl),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      episode.title,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Text(
+                    episode.channel.name,
+                    maxLines: 1,
+                  ),
+                  Text('${episode.views}'),
+                ],
+              ),
+            ),
+            IconButton(
+              icon: Icon(Icons.more_vert),
+              onPressed: () {},
+            ),
+          ],
+        ),
       ),
     );
   }

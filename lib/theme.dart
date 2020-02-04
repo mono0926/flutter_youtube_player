@@ -19,20 +19,21 @@ ThemeData buildLightTheme(BuildContext context) {
   return ThemeData.from(
     colorScheme: const ColorScheme.light(
       primary: _primaryColor,
+      secondary: Colors.blueAccent,
     ),
   ).followLatestSpec().copyWith(
-        appBarTheme: AppBarTheme(
-          color: Colors.white,
-          textTheme: appBartTextTheme,
-          iconTheme: const IconThemeData(
-            color: Color(0xFF666666),
-          ),
-          brightness: context.select(
-            (ThemeNotifier theme) => theme.appBarBrightness,
-          ),
+      appBarTheme: AppBarTheme(
+        color: Colors.white,
+        textTheme: appBartTextTheme,
+        iconTheme: const IconThemeData(
+          color: Color(0xFF666666),
         ),
-        scaffoldBackgroundColor: const Color(0xFFF3F3F3),
-      );
+        brightness: context.select(
+          (ThemeNotifier theme) => theme.appBarBrightness,
+        ),
+      ),
+      scaffoldBackgroundColor: const Color(0xFFF3F3F3),
+      dividerColor: Colors.black38);
 }
 
 ThemeData buildDarkTheme() {
