@@ -48,9 +48,10 @@ class EpisodePlayer extends StatelessWidget {
             notifier.shrink();
           }
         },
-        child: const MaterialApp(
+        child: WidgetsApp(
           debugShowCheckedModeBanner: false,
-          home: _Home(),
+          builder: (context, child) => _Home(),
+          color: Colors.white,
         ),
       ),
     );
