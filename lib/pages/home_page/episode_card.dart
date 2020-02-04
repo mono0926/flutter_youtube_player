@@ -27,7 +27,7 @@ class EpisodeCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    _buildTitle(context),
+                    Text(episode.title),
                     EpisodeDescriptionText(episode: episode),
                   ],
                 ),
@@ -41,12 +41,6 @@ class EpisodeCard extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  Widget _buildTitle(BuildContext context) {
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
-    return Text(episode.title);
   }
 
   Widget _buildChannelIcon() {

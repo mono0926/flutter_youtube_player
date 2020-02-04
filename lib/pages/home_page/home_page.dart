@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_youtube_player/app.dart';
+import 'package:flutter_youtube_player/models/models.dart';
 import 'package:flutter_youtube_player/pages/episode_player/episode_player.dart';
 import 'package:flutter_youtube_player/pages/home_page/app_bottom_navigation_bar.dart';
 import 'package:flutter_youtube_player/pages/tabs/home_tab/home_tab.dart';
@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
           body: _pages[
               context.select((HomePageState state) => state.currentIndex)],
         ),
-        const FadeScreen(),
+        const _FadeScreen(),
         const EpisodePlayer(),
       ],
     );
@@ -50,5 +50,33 @@ class HomePageState with ChangeNotifier {
   set currentIndex(int index) {
     _currentIndex = index;
     notifyListeners();
+  }
+}
+
+class _FadeScreen extends StatelessWidget {
+  const _FadeScreen({Key key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    final notifier = context.read<PlayerNotifier>();
+    return IgnorePointer(
+      child: Stack(
+        children: <Widget>[
+          Positioned.fill(
+            bottom: null,
+            child: FadeTransition(
+              opacity: notifier.expandingEndAnimation,
+              child: Container(
+                height: MediaQuery.of(context).padding.top,
+                color: Colors.black,
+              ),
+            ),
+          ),
+          FadeTransition(
+            opacity: notifier.expandingAnimation,
+            child: Container(color: Colors.black54),
+          ),
+        ],
+      ),
+    );
   }
 }

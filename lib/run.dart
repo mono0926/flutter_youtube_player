@@ -5,6 +5,7 @@ import 'package:vsync_provider/vsync_provider.dart';
 
 import 'app.dart';
 import 'router.dart';
+import 'theme.dart';
 
 void run() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,10 +15,14 @@ void run() {
         Provider(create: (context) => Router()),
         VsyncProvider(),
         ChangeNotifierProvider(
+          create: (context) => ThemeNotifier(),
+        ),
+        ChangeNotifierProvider(
           create: (context) => PlayerNotifier(
+            themeNotifier: context.read(),
             tickerProvider: VsyncProvider.of(context),
           ),
-        )
+        ),
       ],
       child: const App(),
     ),

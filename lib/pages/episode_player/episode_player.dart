@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_youtube_player/models/models.dart';
 import 'package:flutter_youtube_player/widgets/episode_description_text.dart';
 import 'package:mono_kit/mono_kit.dart';
@@ -56,7 +57,7 @@ class EpisodePlayer extends StatelessWidget {
             settings: settings,
             builder: builder,
           ),
-          home: _Home(),
+          home: const _Home(),
         ),
       ),
     );
@@ -104,17 +105,23 @@ class _Body extends StatelessWidget {
   Widget build(BuildContext context) {
     final notifier = context.watch<PlayerNotifier>();
     final episode = notifier.episode;
-    return ListView(
-      children: <Widget>[
-        ListTile(
-          title: Text(episode.title),
-          subtitle: EpisodeDescriptionText(episode: episode),
-          trailing: IconButton(
-            icon: Icon(Icons.arrow_drop_down),
-            onPressed: () {},
+    return FadeTransition(
+      opacity: notifier.expandingMiddleToEndAnimation,
+      child: ListView(
+        children: <Widget>[
+          ListTile(
+            title: Text(episode.title),
+            subtitle: EpisodeDescriptionText(episode: episode),
+            trailing: IconButton(
+              icon: Icon(Icons.arrow_drop_down),
+              onPressed: () => SystemChrome.setSystemUIOverlayStyle(
+                const SystemUiOverlayStyle(
+                    statusBarBrightness: Brightness.dark),
+              ),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
