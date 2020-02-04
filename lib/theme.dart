@@ -36,6 +36,7 @@ ThemeData buildLightTheme(BuildContext context) {
       dividerColor: Colors.black38);
 }
 
+// TODO(mono): 対応
 ThemeData buildDarkTheme() {
   return ThemeData.from(
     colorScheme: const ColorScheme.dark(
