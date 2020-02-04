@@ -13,17 +13,17 @@ class PlayerNotifier with ChangeNotifier {
     _expandingAnimationController = AnimationController(
       vsync: tickerProvider,
       duration: duration,
-    );
-    _expandingAnimation = _expandingAnimationController;
-    _expandingEndAnimation = _expandingAnimationController.drive(
-      CurveTween(
-        curve: const Interval(0.8, 1),
-      ),
     )..addListener(() {
         themeNotifier.appBarBrightness = _expandingEndAnimation.value == 0
             ? Brightness.light
             : Brightness.dark;
       });
+    _expandingAnimation = _expandingAnimationController;
+    _expandingEndAnimation = _expandingAnimationController.drive(
+      CurveTween(
+        curve: const Interval(0.8, 1),
+      ),
+    );
     _expandingMiddleToEndAnimation = _expandingAnimationController.drive(
       CurveTween(
         curve: const Interval(0.2, 1),
