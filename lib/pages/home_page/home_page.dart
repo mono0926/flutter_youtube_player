@@ -48,10 +48,14 @@ class HomePage extends StatelessWidget {
       children: <Widget>[
         Scaffold(
           bottomNavigationBar: const AppBottomNavigationBar(),
-          body: _pages[
-              context.select((HomePageState state) => state.currentIndex)],
+          body: Stack(
+            children: <Widget>[
+              _pages[
+                  context.select((HomePageState state) => state.currentIndex)],
+              const _FadeScreen(),
+            ],
+          ),
         ),
-        const _FadeScreen(),
         const TouchIndicator(
           forceInReleaseMode: true,
           child: EpisodePlayer(),
