@@ -37,7 +37,7 @@ class EpisodePlayer extends StatelessWidget {
         onTap: animation.expand,
         onVerticalDragUpdate: (details) {
           final delta = -details.primaryDelta;
-          animation.addExpandingAnimation(delta / topDistance);
+          animation.addAnimationValue(delta / topDistance);
         },
         onVerticalDragEnd: (details) {
           final threshold =

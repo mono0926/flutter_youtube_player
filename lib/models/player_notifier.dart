@@ -52,7 +52,7 @@ class PlayerAnimationManager implements Disposable {
     }
   }
 
-  void addExpandingAnimation(double value) {
+  void addAnimationValue(double value) {
     _resetAnimationIfNeeded();
     _animationController.value += value;
   }
