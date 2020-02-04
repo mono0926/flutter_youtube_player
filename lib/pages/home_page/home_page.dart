@@ -39,8 +39,8 @@ class HomePage extends StatelessWidget {
               context.select((HomePageState state) => state.currentIndex)],
         ),
         const _FadeScreen(),
-        TouchIndicator(
-          child: const EpisodePlayer(),
+        const TouchIndicator(
+          child: EpisodePlayer(),
         ),
       ],
     );

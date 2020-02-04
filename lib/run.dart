@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_youtube_player/models/episode_notifier.dart';
 import 'package:flutter_youtube_player/models/player_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:vsync_provider/vsync_provider.dart';
@@ -14,15 +15,16 @@ void run() {
       providers: [
         Provider(create: (context) => Router()),
         VsyncProvider(isSingleTicker: false),
-        ChangeNotifierProvider(
-          create: (context) => ThemeNotifier(),
-        ),
+        ChangeNotifierProvider(create: (context) => ThemeNotifier()),
         ChangeNotifierProvider(
           create: (context) => PlayerNotifier(
             themeNotifier: context.read(),
             tickerProvider: VsyncProvider.of(context),
           ),
         ),
+        ChangeNotifierProvider(
+          create: (context) => EpisodeNotifier(),
+        )
       ],
       child: const App(),
     ),

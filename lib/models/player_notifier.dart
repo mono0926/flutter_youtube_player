@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_youtube_player/models/models.dart';
 import 'package:flutter_youtube_player/theme.dart';
 
 // TODO(mono): 完全に隠れた方のアニメーションを無効化したり(Visibility+α)
@@ -51,14 +50,6 @@ class PlayerNotifier with ChangeNotifier {
 
   var _status = PlayerStatus.shrinked;
   PlayerStatus get status => _status;
-
-  // TODO(mono): nullにする
-  Episode _episode = Episode.example.first;
-  Episode get episode => _episode;
-  set episode(Episode episode) {
-    _episode = episode;
-    notifyListeners();
-  }
 
   void _resetAnimation() {
     _expandingAnimationController.duration = duration;

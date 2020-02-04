@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_youtube_player/models/models.dart';
 import 'package:flutter_youtube_player/widgets/episode_description_text.dart';
-import 'package:mono_kit/mono_kit.dart';
 import 'package:provider/provider.dart';
 
 class EpisodePlayer extends StatelessWidget {
@@ -12,8 +11,7 @@ class EpisodePlayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mediaQuery =
-        MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+    final mediaQuery = MediaQuery.of(context);
     final notifier = context.watch<PlayerNotifier>();
     final shrinkedBottom =
         mediaQuery.padding.bottom + _bottomBarHeight + _margin;
@@ -50,15 +48,7 @@ class EpisodePlayer extends StatelessWidget {
             notifier.shrink();
           }
         },
-        child: WidgetsApp(
-          debugShowCheckedModeBanner: false,
-          color: Colors.white,
-          pageRouteBuilder: <T>(settings, builder) => ModalPageRoute<T>(
-            settings: settings,
-            builder: builder,
-          ),
-          home: const _Home(),
-        ),
+        child: const _Home(),
       ),
     );
   }
@@ -103,10 +93,11 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final notifier = context.watch<PlayerNotifier>();
-    final episode = notifier.episode;
+    final episodeNotifier = context.watch<EpisodeNotifier>();
+    final playerNotifier = context.watch<PlayerNotifier>();
+    final episode = episodeNotifier.episode;
     return FadeTransition(
-      opacity: notifier.contentFadeAnimation,
+      opacity: playerNotifier.contentFadeAnimation,
       child: ListView(
         children: <Widget>[
           ListTile(
@@ -128,7 +119,7 @@ class _VideoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final notifier = context.watch<PlayerNotifier>();
+    final notifier = context.watch<EpisodeNotifier>();
     final episode = notifier.episode;
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
