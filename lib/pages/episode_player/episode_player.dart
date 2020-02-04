@@ -21,11 +21,10 @@ class EpisodePlayer extends StatelessWidget {
     final shrinkedTop =
         mediaQuery.size.height - shrinkedBottom - _bottomBarHeight;
     final topDistance = shrinkedTop - mediaQuery.padding.top;
-    final expandingAnimation = notifier.expandingAnimation;
     return AnimatedBuilder(
-      animation: expandingAnimation,
+      animation: notifier.expandingAnimation,
       builder: (context, child) {
-        final expandedRatio = expandingAnimation.value;
+        final expandedRatio = notifier.expandingAnimation.value;
         final top = shrinkedTop - topDistance * expandedRatio;
         final margin = (1 - expandedRatio) * _margin;
         final bottom = (1 - expandedRatio) * shrinkedBottom;
@@ -44,7 +43,9 @@ class EpisodePlayer extends StatelessWidget {
           notifier.addExpandingAnimation(delta / topDistance);
         },
         onVerticalDragEnd: (details) {
-          if (expandingAnimation.value > 0.5) {
+          final threshold =
+              notifier.status == PlayerStatus.shrinked ? 0.3 : 0.7;
+          if (notifier.expandingAnimation.value > threshold) {
             notifier.expand();
           } else {
             notifier.shrink();
@@ -188,12 +189,11 @@ class _Video extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final notifier = context.watch<PlayerNotifier>();
-    final expandingAnimation = notifier.expandingAnimation;
     return AnimatedBuilder(
-      animation: expandingAnimation,
+      animation: notifier.expandingAnimation,
       builder: (context, child) {
         return AspectRatio(
-          aspectRatio: _aspectTween.evaluate(expandingAnimation),
+          aspectRatio: _aspectTween.evaluate(notifier.expandingAnimation),
           child: child,
         );
       },
