@@ -8,7 +8,7 @@ import 'package:flutter_youtube_player/theme.dart';
 class PlayerAnimationManager implements Disposable {
   PlayerAnimationManager({
     @required this.themeNotifier,
-    @required this.tickerProvider,
+    @required TickerProvider tickerProvider,
   }) : _expandingAnimationController = AnimationController(
           vsync: tickerProvider,
           duration: duration,
@@ -34,7 +34,6 @@ class PlayerAnimationManager implements Disposable {
   // TODO(mono): 200くらいが良い
   static const duration = Duration(milliseconds: 1000);
   final ThemeNotifier themeNotifier;
-  final TickerProvider tickerProvider;
   final AnimationController _expandingAnimationController;
   Animation<double> _expandingAnimation;
   Animation<double> _topFadeAnimation;
