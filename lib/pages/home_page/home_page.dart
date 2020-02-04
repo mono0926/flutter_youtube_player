@@ -58,6 +58,9 @@ class HomePageState with ChangeNotifier {
 
 class _FadeScreen extends StatelessWidget {
   const _FadeScreen({Key key}) : super(key: key);
+
+  static final _fadeTween = Tween<double>(begin: 0, end: 0.7);
+
   @override
   Widget build(BuildContext context) {
     final notifier = context.read<PlayerNotifier>();
@@ -75,8 +78,8 @@ class _FadeScreen extends StatelessWidget {
             ),
           ),
           FadeTransition(
-            opacity: notifier.overallFadeAnimation,
-            child: Container(color: Colors.black54),
+            opacity: notifier.overallFadeAnimation.drive(_fadeTween),
+            child: Container(color: Colors.black),
           ),
         ],
       ),
