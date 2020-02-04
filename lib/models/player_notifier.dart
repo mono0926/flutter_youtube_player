@@ -1,6 +1,4 @@
 import 'package:disposable_provider/disposable_provider.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_youtube_player/theme.dart';
 
