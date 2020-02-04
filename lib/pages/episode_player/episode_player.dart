@@ -62,7 +62,7 @@ class _Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final animation = context.watch<PlayerAnimationManager>();
-    // Scaffoldで囲むとタップ効かなくなるがpadding無効化
+    // padding.topにマージンを設けているのでSafeArea無効化すると都合が良い
     return MediaQuery.removePadding(
       context: context,
       removeTop: true,
