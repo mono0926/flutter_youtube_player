@@ -81,7 +81,7 @@ class PlayerNotifier with ChangeNotifier {
           (duration.inMilliseconds * (tween.end - tween.begin)).round(),
     );
     _expandingAnimation = _expandingAnimationController
-        .drive(CurveTween(curve: Curves.easeInOut))
+        .drive(CurveTween(curve: Curves.easeInCirc))
         .drive(tween);
     _fadeAnimationController.reverse();
     await _expandingAnimationController.reverse(from: 1);
