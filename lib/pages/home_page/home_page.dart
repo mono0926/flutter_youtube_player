@@ -67,7 +67,7 @@ class _FadeScreen extends StatelessWidget {
           Positioned.fill(
             bottom: null,
             child: FadeTransition(
-              opacity: notifier.expandingEndAnimation,
+              opacity: notifier.topFadeAnimation,
               child: Container(
                 height: MediaQuery.of(context).padding.top,
                 color: Colors.black,
@@ -75,7 +75,7 @@ class _FadeScreen extends StatelessWidget {
             ),
           ),
           FadeTransition(
-            opacity: notifier.expandingAnimation,
+            opacity: notifier.overallFadeAnimation,
             child: Container(color: Colors.black54),
           ),
         ],

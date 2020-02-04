@@ -13,7 +13,7 @@ void run() {
     MultiProvider(
       providers: [
         Provider(create: (context) => Router()),
-        VsyncProvider(),
+        VsyncProvider(isSingleTicker: false),
         ChangeNotifierProvider(
           create: (context) => ThemeNotifier(),
         ),

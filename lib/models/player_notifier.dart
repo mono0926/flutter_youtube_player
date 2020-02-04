@@ -13,18 +13,22 @@ class PlayerNotifier with ChangeNotifier {
     _expandingAnimationController = AnimationController(
       vsync: tickerProvider,
       duration: duration,
+    );
+    _fadeAnimationController = AnimationController(
+      vsync: tickerProvider,
+      duration: duration,
     )..addListener(() {
-        themeNotifier.appBarBrightness = _expandingEndAnimation.value == 0
-            ? Brightness.light
-            : Brightness.dark;
+        themeNotifier.appBarBrightness =
+            _topFadeAnimation.value == 0 ? Brightness.light : Brightness.dark;
+        print(expandingAnimation.value);
       });
     _expandingAnimation = _expandingAnimationController;
-    _expandingEndAnimation = _expandingAnimationController.drive(
+    _topFadeAnimation = _fadeAnimationController.drive(
       CurveTween(
         curve: const Interval(0.8, 1),
       ),
     );
-    _expandingMiddleToEndAnimation = _expandingAnimationController.drive(
+    _contentFadeAnimation = _fadeAnimationController.drive(
       CurveTween(
         curve: const Interval(0.2, 1),
       ),
@@ -35,14 +39,15 @@ class PlayerNotifier with ChangeNotifier {
   final ThemeNotifier themeNotifier;
   final TickerProvider tickerProvider;
   AnimationController _expandingAnimationController;
+  AnimationController _fadeAnimationController;
   Animation<double> _expandingAnimation;
-  Animation<double> _expandingEndAnimation;
-  Animation<double> _expandingMiddleToEndAnimation;
+  Animation<double> _topFadeAnimation;
+  Animation<double> _contentFadeAnimation;
 
   Animation<double> get expandingAnimation => _expandingAnimation;
-  Animation<double> get expandingEndAnimation => _expandingEndAnimation;
-  Animation<double> get expandingMiddleToEndAnimation =>
-      _expandingMiddleToEndAnimation;
+  Animation<double> get topFadeAnimation => _topFadeAnimation;
+  Animation<double> get contentFadeAnimation => _contentFadeAnimation;
+  Animation<double> get overallFadeAnimation => _fadeAnimationController;
 
   var _status = PlayerStatus.shrinked;
   PlayerStatus get status => _status;
@@ -55,13 +60,14 @@ class PlayerNotifier with ChangeNotifier {
     notifyListeners();
   }
 
-  void _initializeDefaultAnimation() {
+  void _resetAnimation() {
     _expandingAnimationController.duration = duration;
     _expandingAnimation = _expandingAnimationController;
   }
 
   void addExpandingAnimation(double value) {
     _expandingAnimationController.value += value;
+    _fadeAnimationController.value += value;
   }
 
   Future<void> shrink() async {
@@ -70,15 +76,16 @@ class PlayerNotifier with ChangeNotifier {
       begin: 0,
       end: _expandingAnimationController.value,
     );
-    final curve = CurveTween(curve: Curves.easeInOut);
     _expandingAnimationController.duration = Duration(
       milliseconds:
           (duration.inMilliseconds * (tween.end - tween.begin)).round(),
     );
-    _expandingAnimation =
-        _expandingAnimationController.drive(tween).drive(curve);
+    _expandingAnimation = _expandingAnimationController
+        .drive(CurveTween(curve: Curves.easeInOut))
+        .drive(tween);
+    _fadeAnimationController.reverse();
     await _expandingAnimationController.reverse(from: 1);
-    _initializeDefaultAnimation();
+    _resetAnimation();
   }
 
   Future<void> expand() async {
@@ -91,11 +98,19 @@ class PlayerNotifier with ChangeNotifier {
       milliseconds:
           (duration.inMilliseconds * (tween.end - tween.begin)).round(),
     );
-    _expandingAnimation = _expandingAnimationController.drive(tween).drive(
-          CurveTween(curve: Curves.easeOutExpo),
-        );
+    _expandingAnimation = _expandingAnimationController
+        .drive(CurveTween(curve: Curves.easeOutExpo))
+        .drive(tween);
+    _fadeAnimationController.forward();
     await _expandingAnimationController.forward(from: 0);
-    _initializeDefaultAnimation();
+    _resetAnimation();
+  }
+
+  @override
+  void dispose() {
+    _expandingAnimationController.dispose();
+    _fadeAnimationController.dispose();
+    super.dispose();
   }
 }
 

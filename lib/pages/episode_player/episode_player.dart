@@ -106,7 +106,7 @@ class _Body extends StatelessWidget {
     final notifier = context.watch<PlayerNotifier>();
     final episode = notifier.episode;
     return FadeTransition(
-      opacity: notifier.expandingMiddleToEndAnimation,
+      opacity: notifier.contentFadeAnimation,
       child: ListView(
         children: <Widget>[
           ListTile(
