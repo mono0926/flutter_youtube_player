@@ -73,7 +73,7 @@ class _Home extends StatelessWidget {
                   ? const _VideoRow()
                   : Column(
                       children: [
-                        const _VideoRow(),
+                        const _Video(),
                         Expanded(
                           child: FadeTransition(
                             opacity: playerNotifier.contentFadeAnimation,
@@ -133,24 +133,21 @@ class _VideoRow extends StatelessWidget {
             )
           ],
         ),
-        _Video(episode: episode),
+        const _Video(),
       ],
     );
   }
 }
 
 class _Video extends StatelessWidget {
-  const _Video({
-    Key key,
-    @required this.episode,
-  }) : super(key: key);
-
-  final Episode episode;
+  const _Video({Key key}) : super(key: key);
 
   static final _aspectTween = Tween<double>(begin: 3, end: 16 / 9);
 
   @override
   Widget build(BuildContext context) {
+    final episodeNotifier = context.watch<EpisodeNotifier>();
+    final episode = episodeNotifier.episode;
     final notifier = context.watch<PlayerNotifier>();
     return AnimatedBuilder(
       animation: notifier.expandingAnimation,
