@@ -51,12 +51,12 @@ class EpisodePlayer extends StatelessWidget {
         },
         child: WidgetsApp(
           debugShowCheckedModeBanner: false,
+          color: Colors.white,
           pageRouteBuilder: <T>(settings, builder) => ModalPageRoute<T>(
             settings: settings,
             builder: builder,
           ),
           home: _Home(),
-          color: Colors.white,
         ),
       ),
     );

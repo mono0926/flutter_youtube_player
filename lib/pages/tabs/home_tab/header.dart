@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_youtube_player/pages/originals_page.dart';
+import 'package:flutter_youtube_player/pages/tabs/home_tab/originals_page.dart';
 
 class Header extends StatelessWidget {
   const Header({

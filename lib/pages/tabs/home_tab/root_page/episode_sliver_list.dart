@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_youtube_player/models/models.dart';
 
-import 'episode_card.dart';
+import '../../../home_page/episode_card.dart';
 
 class EpisodeSliverList extends StatelessWidget {
   const EpisodeSliverList({
