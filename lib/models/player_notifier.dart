@@ -9,23 +9,23 @@ class PlayerAnimationManager implements Disposable {
   PlayerAnimationManager({
     @required this.themeNotifier,
     @required TickerProvider tickerProvider,
-  }) : _expandingAnimationController = AnimationController(
+  }) : _animationController = AnimationController(
           vsync: tickerProvider,
           duration: duration,
         ) {
     _resetAnimationIfNeeded();
-    _topFadeAnimation = _expandingAnimationController.drive(
+    _topFadeAnimation = _animationController.drive(
       CurveTween(
         curve: const Interval(0.8, 1),
       ),
     );
-    _contentFadeAnimation = _expandingAnimationController.drive(
+    _contentFadeAnimation = _animationController.drive(
       CurveTween(
         curve: const Interval(0.2, 1),
       ),
     );
 
-    _expandingAnimationController.addListener(() {
+    _animationController.addListener(() {
       themeNotifier.appBarBrightness =
           _topFadeAnimation.value == 0 ? Brightness.light : Brightness.dark;
     });
@@ -34,12 +34,12 @@ class PlayerAnimationManager implements Disposable {
   // TODO(mono): 200くらいが良い
   static const duration = Duration(milliseconds: 1000);
   final ThemeNotifier themeNotifier;
-  final AnimationController _expandingAnimationController;
-  Animation<double> _expandingAnimation;
+  final AnimationController _animationController;
+  Animation<double> _animation;
   Animation<double> _topFadeAnimation;
   Animation<double> _contentFadeAnimation;
 
-  Animation<double> get expandingAnimation => _expandingAnimation;
+  Animation<double> get animation => _animation;
   Animation<double> get topFadeAnimation => _topFadeAnimation;
   Animation<double> get contentFadeAnimation => _contentFadeAnimation;
 
@@ -47,23 +47,23 @@ class PlayerAnimationManager implements Disposable {
   PlayerStatus get status => _status;
 
   void _resetAnimationIfNeeded() {
-    if (_expandingAnimation != _expandingAnimationController) {
-      _expandingAnimation = _expandingAnimationController;
+    if (_animation != _animationController) {
+      _animation = _animationController;
     }
   }
 
   void addExpandingAnimation(double value) {
     _resetAnimationIfNeeded();
-    _expandingAnimationController.value += value;
+    _animationController.value += value;
   }
 
   Future<void> shrink() async {
     _status = PlayerStatus.shrinked;
     final tween = Tween<double>(
       begin: 0,
-      end: _expandingAnimationController.value,
+      end: _animationController.value,
     );
-    _expandingAnimation = _expandingAnimationController
+    _animation = _animationController
         .drive(
           CurveTween(
             curve: Interval(
@@ -74,17 +74,17 @@ class PlayerAnimationManager implements Disposable {
           ),
         )
         .drive(tween);
-    await _expandingAnimationController.reverse();
+    await _animationController.reverse();
     _resetAnimationIfNeeded();
   }
 
   Future<void> expand() async {
     _status = PlayerStatus.expanded;
     final tween = Tween<double>(
-      begin: _expandingAnimationController.value,
+      begin: _animationController.value,
       end: 1,
     );
-    _expandingAnimation = _expandingAnimationController
+    _animation = _animationController
         .drive(
           CurveTween(
             curve: Interval(
@@ -95,13 +95,13 @@ class PlayerAnimationManager implements Disposable {
           ),
         )
         .drive(tween);
-    await _expandingAnimationController.forward();
+    await _animationController.forward();
     _resetAnimationIfNeeded();
   }
 
   @override
   void dispose() {
-    _expandingAnimationController.dispose();
+    _animationController.dispose();
   }
 }
 

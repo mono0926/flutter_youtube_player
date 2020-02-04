@@ -10,10 +10,10 @@ class AppBottomNavigationBar extends StatelessWidget {
     final animation = context.watch<PlayerAnimationManager>();
 
     return AnimatedBuilder(
-      animation: animation.expandingAnimation,
+      animation: animation.animation,
       builder: (context, child) => Align(
         alignment: Alignment.topCenter,
-        heightFactor: 1 - animation.expandingAnimation.value,
+        heightFactor: 1 - animation.animation.value,
         child: child,
       ),
       child: BottomNavigationBar(

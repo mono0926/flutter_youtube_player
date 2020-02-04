@@ -19,9 +19,9 @@ class EpisodePlayer extends StatelessWidget {
         mediaQuery.size.height - shrinkedBottom - _bottomBarHeight;
     final topDistance = shrinkedTop - mediaQuery.padding.top;
     return AnimatedBuilder(
-      animation: animation.expandingAnimation,
+      animation: animation.animation,
       builder: (context, child) {
-        final expandedRatio = animation.expandingAnimation.value;
+        final expandedRatio = animation.animation.value;
         final top = shrinkedTop - topDistance * expandedRatio;
         final margin = (1 - expandedRatio) * _margin;
         final bottom = (1 - expandedRatio) * shrinkedBottom;
@@ -42,7 +42,7 @@ class EpisodePlayer extends StatelessWidget {
         onVerticalDragEnd: (details) {
           final threshold =
               animation.status == PlayerStatus.shrinked ? 0.3 : 0.7;
-          if (animation.expandingAnimation.value > threshold) {
+          if (animation.animation.value > threshold) {
             animation.expand();
           } else {
             animation.shrink();
@@ -150,10 +150,10 @@ class _Video extends StatelessWidget {
     final episode = episodeNotifier.episode;
     final animation = context.watch<PlayerAnimationManager>();
     return AnimatedBuilder(
-      animation: animation.expandingAnimation,
+      animation: animation.animation,
       builder: (context, child) {
         return AspectRatio(
-          aspectRatio: _aspectTween.evaluate(animation.expandingAnimation),
+          aspectRatio: _aspectTween.evaluate(animation.animation),
           child: child,
         );
       },
