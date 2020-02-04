@@ -49,6 +49,9 @@ class ThemeNotifier with ChangeNotifier {
   var _appBarBrightness = Brightness.light;
   Brightness get appBarBrightness => _appBarBrightness;
   set appBarBrightness(Brightness brightness) {
+    if (_appBarBrightness == brightness) {
+      return;
+    }
     _appBarBrightness = brightness;
     notifyListeners();
   }
