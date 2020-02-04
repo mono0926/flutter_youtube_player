@@ -1,3 +1,4 @@
+import 'package:disposable_provider/disposable_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_youtube_player/models/models.dart';
 import 'package:flutter_youtube_player/pages/episode_player/episode_player.dart';
@@ -9,13 +10,25 @@ import 'package:flutter_youtube_player/pages/tabs/subscriptions_tab.dart';
 import 'package:flutter_youtube_player/pages/tabs/trending_tab.dart';
 import 'package:provider/provider.dart';
 import 'package:touch_indicator/touch_indicator.dart';
+import 'package:vsync_provider/vsync_provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage._({Key key}) : super(key: key);
 
   static Widget wrapped() {
-    return ChangeNotifierProvider(
-      create: (context) => HomePageState(),
+    return MultiProvider(
+      providers: [
+        VsyncProvider(),
+        DisposableProvider(
+          create: (context) => PlayerNotifier(
+            themeNotifier: context.read(),
+            tickerProvider: VsyncProvider.of(context),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => HomePageState(),
+        )
+      ],
       child: const HomePage._(),
     );
   }
