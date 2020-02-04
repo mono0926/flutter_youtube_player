@@ -9,15 +9,11 @@ class PlayerAnimationManager implements Disposable {
   PlayerAnimationManager({
     @required this.themeNotifier,
     @required this.tickerProvider,
-  }) {
-    _expandingAnimationController = AnimationController(
-      vsync: tickerProvider,
-      duration: duration,
-    )..addListener(() {
-        themeNotifier.appBarBrightness =
-            _topFadeAnimation.value == 0 ? Brightness.light : Brightness.dark;
-      });
-    _expandingAnimation = _expandingAnimationController;
+  }) : _expandingAnimationController = AnimationController(
+          vsync: tickerProvider,
+          duration: duration,
+        ) {
+    _resetAnimationIfNeeded();
     _topFadeAnimation = _expandingAnimationController.drive(
       CurveTween(
         curve: const Interval(0.8, 1),
@@ -28,13 +24,18 @@ class PlayerAnimationManager implements Disposable {
         curve: const Interval(0.2, 1),
       ),
     );
+
+    _expandingAnimationController.addListener(() {
+      themeNotifier.appBarBrightness =
+          _topFadeAnimation.value == 0 ? Brightness.light : Brightness.dark;
+    });
   }
 
   // TODO(mono): 200くらいが良い
   static const duration = Duration(milliseconds: 1000);
   final ThemeNotifier themeNotifier;
   final TickerProvider tickerProvider;
-  AnimationController _expandingAnimationController;
+  final AnimationController _expandingAnimationController;
   Animation<double> _expandingAnimation;
   Animation<double> _topFadeAnimation;
   Animation<double> _contentFadeAnimation;
