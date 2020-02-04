@@ -1,10 +1,11 @@
+import 'package:disposable_provider/disposable_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_youtube_player/theme.dart';
 
 // TODO(mono): 完全に隠れた方のアニメーションを無効化したり(Visibility+α)
-class PlayerNotifier with ChangeNotifier {
+class PlayerNotifier implements Disposable {
   PlayerNotifier({
     @required this.themeNotifier,
     @required this.tickerProvider,
@@ -12,21 +13,17 @@ class PlayerNotifier with ChangeNotifier {
     _expandingAnimationController = AnimationController(
       vsync: tickerProvider,
       duration: duration,
-    );
-    _fadeAnimationController = AnimationController(
-      vsync: tickerProvider,
-      duration: duration,
     )..addListener(() {
         themeNotifier.appBarBrightness =
             _topFadeAnimation.value == 0 ? Brightness.light : Brightness.dark;
       });
     _expandingAnimation = _expandingAnimationController;
-    _topFadeAnimation = _fadeAnimationController.drive(
+    _topFadeAnimation = _expandingAnimationController.drive(
       CurveTween(
         curve: const Interval(0.8, 1),
       ),
     );
-    _contentFadeAnimation = _fadeAnimationController.drive(
+    _contentFadeAnimation = _expandingAnimationController.drive(
       CurveTween(
         curve: const Interval(0.2, 1),
       ),
@@ -37,7 +34,6 @@ class PlayerNotifier with ChangeNotifier {
   final ThemeNotifier themeNotifier;
   final TickerProvider tickerProvider;
   AnimationController _expandingAnimationController;
-  AnimationController _fadeAnimationController;
   Animation<double> _expandingAnimation;
   Animation<double> _topFadeAnimation;
   Animation<double> _contentFadeAnimation;
@@ -45,18 +41,19 @@ class PlayerNotifier with ChangeNotifier {
   Animation<double> get expandingAnimation => _expandingAnimation;
   Animation<double> get topFadeAnimation => _topFadeAnimation;
   Animation<double> get contentFadeAnimation => _contentFadeAnimation;
-  Animation<double> get overallFadeAnimation => _fadeAnimationController;
 
   var _status = PlayerStatus.shrinked;
   PlayerStatus get status => _status;
 
-  void _resetAnimation() {
-    _expandingAnimation = _expandingAnimationController;
+  void _resetAnimationIfNeeded() {
+    if (_expandingAnimation != _expandingAnimationController) {
+      _expandingAnimation = _expandingAnimationController;
+    }
   }
 
   void addExpandingAnimation(double value) {
+    _resetAnimationIfNeeded();
     _expandingAnimationController.value += value;
-    _fadeAnimationController.value += value;
   }
 
   Future<void> shrink() async {
@@ -77,9 +74,8 @@ class PlayerNotifier with ChangeNotifier {
             end: _expandingAnimationController.value,
           ),
         );
-    _fadeAnimationController.reverse();
     await _expandingAnimationController.reverse();
-    _resetAnimation();
+    _resetAnimationIfNeeded();
   }
 
   Future<void> expand() async {
@@ -88,7 +84,7 @@ class PlayerNotifier with ChangeNotifier {
         .drive(
           CurveTween(
             curve: Interval(
-              _fadeAnimationController.value,
+              _expandingAnimationController.value,
               1,
               curve: Curves.easeOutExpo,
             ),
@@ -96,20 +92,17 @@ class PlayerNotifier with ChangeNotifier {
         )
         .drive(
           Tween<double>(
-            begin: _fadeAnimationController.value,
+            begin: _expandingAnimationController.value,
             end: 1,
           ),
         );
-    _fadeAnimationController.forward();
     await _expandingAnimationController.forward();
-    _resetAnimation();
+    _resetAnimationIfNeeded();
   }
 
   @override
   void dispose() {
     _expandingAnimationController.dispose();
-    _fadeAnimationController.dispose();
-    super.dispose();
   }
 }
 

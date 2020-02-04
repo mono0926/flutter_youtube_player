@@ -40,6 +40,7 @@ class HomePage extends StatelessWidget {
         ),
         const _FadeScreen(),
         const TouchIndicator(
+          forceInReleaseMode: true,
           child: EpisodePlayer(),
         ),
       ],
@@ -78,7 +79,7 @@ class _FadeScreen extends StatelessWidget {
             ),
           ),
           FadeTransition(
-            opacity: notifier.overallFadeAnimation.drive(_fadeTween),
+            opacity: notifier.expandingAnimation.drive(_fadeTween),
             child: Container(color: Colors.black),
           ),
         ],

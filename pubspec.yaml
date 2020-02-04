@@ -8,6 +8,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons:
+  disposable_provider:
   intl:
   timeago:
   mono_kit: ^0.14.0-dev

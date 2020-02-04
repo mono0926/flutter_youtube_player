@@ -1,3 +1,4 @@
+import 'package:disposable_provider/disposable_provider.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_youtube_player/models/episode_notifier.dart';
 import 'package:flutter_youtube_player/models/player_notifier.dart';
@@ -14,9 +15,9 @@ void run() {
     MultiProvider(
       providers: [
         Provider(create: (context) => Router()),
-        VsyncProvider(isSingleTicker: false),
+        VsyncProvider(),
         ChangeNotifierProvider(create: (context) => ThemeNotifier()),
-        ChangeNotifierProvider(
+        DisposableProvider(
           create: (context) => PlayerNotifier(
             themeNotifier: context.read(),
             tickerProvider: VsyncProvider.of(context),
