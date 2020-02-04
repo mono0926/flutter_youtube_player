@@ -30,6 +30,7 @@ class PlayerNotifier implements Disposable {
     );
   }
 
+  // TODO(mono): 200くらいが良い
   static const duration = Duration(milliseconds: 1000);
   final ThemeNotifier themeNotifier;
   final TickerProvider tickerProvider;
