@@ -8,6 +8,7 @@ import 'package:flutter_youtube_player/pages/tabs/library_tab.dart';
 import 'package:flutter_youtube_player/pages/tabs/subscriptions_tab.dart';
 import 'package:flutter_youtube_player/pages/tabs/trending_tab.dart';
 import 'package:provider/provider.dart';
+import 'package:touch_indicator/touch_indicator.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage._({Key key}) : super(key: key);
@@ -38,7 +39,9 @@ class HomePage extends StatelessWidget {
               context.select((HomePageState state) => state.currentIndex)],
         ),
         const _FadeScreen(),
-        const EpisodePlayer(),
+        TouchIndicator(
+          child: const EpisodePlayer(),
+        ),
       ],
     );
   }

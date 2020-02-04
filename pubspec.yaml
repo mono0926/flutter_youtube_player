@@ -13,6 +13,7 @@ dependencies:
   mono_kit: ^0.14.0-dev
   provider:
   google_fonts:
+  touch_indicator:
   vsync_provider:
 dev_dependencies:
   flutter_test:
