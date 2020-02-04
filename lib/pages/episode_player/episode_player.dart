@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_youtube_player/models/models.dart';
 import 'package:flutter_youtube_player/widgets/episode_description_text.dart';
 import 'package:mono_kit/mono_kit.dart';
@@ -115,10 +114,7 @@ class _Body extends StatelessWidget {
             subtitle: EpisodeDescriptionText(episode: episode),
             trailing: IconButton(
               icon: Icon(Icons.arrow_drop_down),
-              onPressed: () => SystemChrome.setSystemUIOverlayStyle(
-                const SystemUiOverlayStyle(
-                    statusBarBrightness: Brightness.dark),
-              ),
+              onPressed: () {},
             ),
           ),
         ],
