@@ -59,44 +59,42 @@ class PlayerNotifier implements Disposable {
 
   Future<void> shrink() async {
     _status = PlayerStatus.shrinked;
+    final tween = Tween<double>(
+      begin: 0,
+      end: _expandingAnimationController.value,
+    );
     _expandingAnimation = _expandingAnimationController
         .drive(
           CurveTween(
             curve: Interval(
-              0,
-              _expandingAnimationController.value,
+              tween.begin,
+              tween.end,
               curve: Curves.easeInCirc,
             ),
           ),
         )
-        .drive(
-          Tween<double>(
-            begin: 0,
-            end: _expandingAnimationController.value,
-          ),
-        );
+        .drive(tween);
     await _expandingAnimationController.reverse();
     _resetAnimationIfNeeded();
   }
 
   Future<void> expand() async {
     _status = PlayerStatus.expanded;
+    final tween = Tween<double>(
+      begin: _expandingAnimationController.value,
+      end: 1,
+    );
     _expandingAnimation = _expandingAnimationController
         .drive(
           CurveTween(
             curve: Interval(
-              _expandingAnimationController.value,
-              1,
+              tween.begin,
+              tween.end,
               curve: Curves.easeOutExpo,
             ),
           ),
         )
-        .drive(
-          Tween<double>(
-            begin: _expandingAnimationController.value,
-            end: 1,
-          ),
-        );
+        .drive(tween);
     await _expandingAnimationController.forward();
     _resetAnimationIfNeeded();
   }
