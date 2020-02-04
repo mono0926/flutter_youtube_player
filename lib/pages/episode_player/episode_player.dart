@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_youtube_player/models/models.dart';
 import 'package:flutter_youtube_player/widgets/episode_description_text.dart';
+import 'package:mono_kit/mono_kit.dart';
 import 'package:provider/provider.dart';
 
 class EpisodePlayer extends StatelessWidget {
@@ -50,7 +51,11 @@ class EpisodePlayer extends StatelessWidget {
         },
         child: WidgetsApp(
           debugShowCheckedModeBanner: false,
-          builder: (context, child) => _Home(),
+          pageRouteBuilder: <T>(settings, builder) => ModalPageRoute<T>(
+            settings: settings,
+            builder: builder,
+          ),
+          home: _Home(),
           color: Colors.white,
         ),
       ),
