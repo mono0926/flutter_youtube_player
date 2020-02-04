@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_youtube_player/pages/originals_page.dart';
 
 class Header extends StatelessWidget {
   const Header({
@@ -18,9 +19,11 @@ class Header extends StatelessWidget {
             icon: Icons.play_circle_outline,
             iconColor: colorScheme.primary,
           ),
-          const _Button(
+          _Button(
             label: 'Originals',
             icon: Icons.movie_creation,
+            onPressed: () =>
+                Navigator.of(context).pushNamed(OriginalsPage.routeName),
           ),
         ],
       ),
@@ -29,21 +32,23 @@ class Header extends StatelessWidget {
 }
 
 class _Button extends StatelessWidget {
-  const _Button(
-      {Key key,
-      @required this.label,
-      @required this.icon,
-      this.iconColor = const Color(0xFF909090)})
-      : super(key: key);
+  const _Button({
+    Key key,
+    @required this.label,
+    @required this.icon,
+    this.iconColor = const Color(0xFF909090),
+    this.onPressed,
+  }) : super(key: key);
 
   final String label;
   final IconData icon;
   final Color iconColor;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return FlatButton(
-      onPressed: () {},
+      onPressed: onPressed ?? () {},
       child: Row(
         children: <Widget>[
           Icon(

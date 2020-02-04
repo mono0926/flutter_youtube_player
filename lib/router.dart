@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_youtube_player/pages/account_page.dart';
+import 'package:flutter_youtube_player/pages/originals_page.dart';
 import 'package:mono_kit/mono_kit.dart';
 
 import 'util/util.dart';
@@ -12,9 +14,13 @@ typedef WidgetPageBuilder = Widget Function(
 class Router {
   static const root = '/';
 
-  final _routes = <String, WidgetPageBuilder>{};
+  final _routes = <String, WidgetPageBuilder>{
+    OriginalsPage.routeName: (context, settings) => const OriginalsPage(),
+  };
   final _fadeRoutes = <String, WidgetPageBuilder>{};
-  final _modalRoutes = <String, WidgetPageBuilder>{};
+  final _modalRoutes = <String, WidgetPageBuilder>{
+    AccountPage.routeName: (context, settings) => const AccountPage(),
+  };
 
   Route<dynamic> onGenerateRoute(RouteSettings settings) {
     logger.info(settings.name);

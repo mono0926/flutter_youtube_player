@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_youtube_player/pages/account_page.dart';
 import 'package:flutter_youtube_player/pages/home_page/app_bottom_navigation_bar.dart';
 import 'package:flutter_youtube_player/util/util.dart';
 import 'package:provider/provider.dart';
@@ -74,7 +75,7 @@ class _ProfileIconButton extends StatelessWidget {
           ),
         ),
       ),
-      onPressed: () {},
+      onPressed: () => Navigator.of(context).pushNamed(AccountPage.routeName),
     );
   }
 }
