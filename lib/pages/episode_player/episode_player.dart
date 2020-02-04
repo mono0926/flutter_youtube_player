@@ -3,6 +3,9 @@ import 'package:flutter_youtube_player/models/models.dart';
 import 'package:flutter_youtube_player/pages/episode_player/episode_player_body.dart';
 import 'package:provider/provider.dart';
 
+const _shrinkedHeight = 50.0;
+const _shrinkedAspectRatio = 2.5;
+
 class EpisodePlayer extends StatelessWidget {
   const EpisodePlayer({Key key}) : super(key: key);
 
@@ -16,7 +19,7 @@ class EpisodePlayer extends StatelessWidget {
     final shrinkedBottom =
         mediaQuery.padding.bottom + _bottomBarHeight + _margin;
     final shrinkedTop =
-        mediaQuery.size.height - shrinkedBottom - _bottomBarHeight;
+        mediaQuery.size.height - (shrinkedBottom + _shrinkedHeight);
     final topDistance = shrinkedTop - mediaQuery.padding.top;
     return AnimatedBuilder(
       animation: animation.animation,
@@ -69,7 +72,7 @@ class _Home extends StatelessWidget {
           child: LayoutBuilder(
             builder: (context, constraints) {
               final aspectRatio = constraints.maxWidth / constraints.maxHeight;
-              return aspectRatio >= 2.8
+              return aspectRatio > _shrinkedAspectRatio - 0.1
                   ? const _VideoRow()
                   : Column(
                       children: [
@@ -105,7 +108,7 @@ class _VideoRow extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const SizedBox(width: 48.0 * 3 + 4.0),
+            const SizedBox(width: _shrinkedHeight * _shrinkedAspectRatio + 4.0),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,7 +145,10 @@ class _VideoRow extends StatelessWidget {
 class _Video extends StatelessWidget {
   const _Video({Key key}) : super(key: key);
 
-  static final _aspectTween = Tween<double>(begin: 3, end: 16 / 9);
+  static final _aspectTween = Tween<double>(
+    begin: _shrinkedAspectRatio,
+    end: 16 / 9,
+  );
 
   @override
   Widget build(BuildContext context) {
