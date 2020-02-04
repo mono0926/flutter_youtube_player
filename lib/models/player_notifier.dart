@@ -19,7 +19,6 @@ class PlayerNotifier with ChangeNotifier {
     )..addListener(() {
         themeNotifier.appBarBrightness =
             _topFadeAnimation.value == 0 ? Brightness.light : Brightness.dark;
-        print(expandingAnimation.value);
       });
     _expandingAnimation = _expandingAnimationController;
     _topFadeAnimation = _fadeAnimationController.drive(
@@ -52,7 +51,6 @@ class PlayerNotifier with ChangeNotifier {
   PlayerStatus get status => _status;
 
   void _resetAnimation() {
-    _expandingAnimationController.duration = duration;
     _expandingAnimation = _expandingAnimationController;
   }
 
@@ -63,37 +61,47 @@ class PlayerNotifier with ChangeNotifier {
 
   Future<void> shrink() async {
     _status = PlayerStatus.shrinked;
-    final tween = Tween<double>(
-      begin: 0,
-      end: _expandingAnimationController.value,
-    );
-    _expandingAnimationController.duration = Duration(
-      milliseconds:
-          (duration.inMilliseconds * (tween.end - tween.begin)).round(),
-    );
     _expandingAnimation = _expandingAnimationController
-        .drive(CurveTween(curve: Curves.easeInCirc))
-        .drive(tween);
+        .drive(
+          CurveTween(
+            curve: Interval(
+              0,
+              _expandingAnimationController.value,
+              curve: Curves.easeInCirc,
+            ),
+          ),
+        )
+        .drive(
+          Tween<double>(
+            begin: 0,
+            end: _expandingAnimationController.value,
+          ),
+        );
     _fadeAnimationController.reverse();
-    await _expandingAnimationController.reverse(from: 1);
+    await _expandingAnimationController.reverse();
     _resetAnimation();
   }
 
   Future<void> expand() async {
     _status = PlayerStatus.expanded;
-    final tween = Tween<double>(
-      begin: _expandingAnimationController.value,
-      end: 1,
-    );
-    _expandingAnimationController.duration = Duration(
-      milliseconds:
-          (duration.inMilliseconds * (tween.end - tween.begin)).round(),
-    );
     _expandingAnimation = _expandingAnimationController
-        .drive(CurveTween(curve: Curves.easeOutExpo))
-        .drive(tween);
+        .drive(
+          CurveTween(
+            curve: Interval(
+              _fadeAnimationController.value,
+              1,
+              curve: Curves.easeOutExpo,
+            ),
+          ),
+        )
+        .drive(
+          Tween<double>(
+            begin: _fadeAnimationController.value,
+            end: 1,
+          ),
+        );
     _fadeAnimationController.forward();
-    await _expandingAnimationController.forward(from: 0);
+    await _expandingAnimationController.forward();
     _resetAnimation();
   }
 
