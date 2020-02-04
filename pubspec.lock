@@ -99,7 +99,7 @@ packages:
       name: google_fonts
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.6"
+    version: "0.3.7"
   http:
     dependency: transitive
     description:
@@ -155,7 +155,7 @@ packages:
       name: mono_kit
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.14.0-dev"
+    version: "0.14.0-dev+1"
   nested:
     dependency: transitive
     description:
@@ -224,7 +224,7 @@ packages:
     description:
       path: "."
       ref: extensions
-      resolved-ref: "7c90e21ecb97a623fdd7fe27740711eed6d7b15b"
+      resolved-ref: e11d3d3898ff27401eabb81dc8f83cf287287b2b
       url: "https://github.com/rrousselGit/provider.git"
     source: git
     version: "4.1.0"
