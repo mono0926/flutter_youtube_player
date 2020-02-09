@@ -56,6 +56,9 @@ class PlayerAnimationManager implements Disposable {
 
   Future<void> expand() async {
     _status = PlayerStatus.expanded;
+
+    // その地点から良い感じのアニメーションカーブをかけるためのケア(shrink()も同様)
+    // https://twitter.com/_mono/status/1226426629800390659
     final tween = Tween<double>(
       begin: _animationController.value,
       end: 1,
@@ -71,6 +74,7 @@ class PlayerAnimationManager implements Disposable {
           ),
         )
         .drive(tween);
+
     await _animationController.forward();
     _resetAnimationIfNeeded();
   }
