@@ -20,10 +20,7 @@ class HomePage extends StatelessWidget {
       providers: [
         VsyncProvider(),
         DisposableProvider(
-          create: (context) => PlayerAnimationManager(
-            themeNotifier: context.read(),
-            tickerProvider: VsyncProvider.of(context),
-          ),
+          create: (context) => PlayerAnimationManager(locator: context.read),
         ),
         ChangeNotifierProvider(
           create: (context) => HomePageState(),

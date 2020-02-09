@@ -1,14 +1,14 @@
 import 'package:disposable_provider/disposable_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_youtube_player/theme.dart';
+import 'package:provider/provider.dart';
 
 // TODO(mono): 完全に隠れた方のアニメーションを無効化したり(Visibility+α)
 class PlayerAnimationManager implements Disposable {
   PlayerAnimationManager({
-    @required this.themeNotifier,
-    @required TickerProvider tickerProvider,
+    @required Locator locator,
   }) : _animationController = AnimationController(
-          vsync: tickerProvider,
+          vsync: locator(),
           duration: duration,
         ) {
     _resetAnimationIfNeeded();
@@ -24,14 +24,13 @@ class PlayerAnimationManager implements Disposable {
     );
 
     _animationController.addListener(() {
-      themeNotifier.appBarBrightness =
+      locator<ThemeNotifier>().appBarBrightness =
           _topFadeAnimation.value == 0 ? Brightness.light : Brightness.dark;
     });
   }
 
   // TODO(mono): 200くらいが良い
   static const duration = Duration(milliseconds: 1000);
-  final ThemeNotifier themeNotifier;
   final AnimationController _animationController;
   Animation<double> _animation;
   Animation<double> _topFadeAnimation;
