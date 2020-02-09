@@ -54,27 +54,6 @@ class PlayerAnimationManager implements Disposable {
     _animationController.value += value;
   }
 
-  Future<void> shrink() async {
-    _status = PlayerStatus.shrinked;
-    final tween = Tween<double>(
-      begin: 0,
-      end: _animationController.value,
-    );
-    _animation = _animationController
-        .drive(
-          CurveTween(
-            curve: Interval(
-              tween.begin,
-              tween.end,
-              curve: Curves.easeInCirc,
-            ),
-          ),
-        )
-        .drive(tween);
-    await _animationController.reverse();
-    _resetAnimationIfNeeded();
-  }
-
   Future<void> expand() async {
     _status = PlayerStatus.expanded;
     final tween = Tween<double>(
@@ -93,6 +72,27 @@ class PlayerAnimationManager implements Disposable {
         )
         .drive(tween);
     await _animationController.forward();
+    _resetAnimationIfNeeded();
+  }
+
+  Future<void> shrink() async {
+    _status = PlayerStatus.shrinked;
+    final tween = Tween<double>(
+      begin: 0,
+      end: _animationController.value,
+    );
+    _animation = _animationController
+        .drive(
+          CurveTween(
+            curve: Interval(
+              tween.begin,
+              tween.end,
+              curve: Curves.easeInCirc,
+            ),
+          ),
+        )
+        .drive(tween);
+    await _animationController.reverse();
     _resetAnimationIfNeeded();
   }
 
