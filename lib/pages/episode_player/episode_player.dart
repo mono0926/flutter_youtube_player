@@ -67,6 +67,7 @@ class _Home extends StatelessWidget {
       context: context,
       removeTop: true,
       child: Scaffold(
+        primary: false,
         body: Material(
           elevation: 2,
           child: LayoutBuilder(
