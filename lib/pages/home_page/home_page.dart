@@ -78,7 +78,7 @@ class _FadeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final animation = context.read<PlayerAnimationManager>();
+    final animation = context.watch<PlayerAnimationManager>();
     return IgnorePointer(
       child: Stack(
         children: <Widget>[
