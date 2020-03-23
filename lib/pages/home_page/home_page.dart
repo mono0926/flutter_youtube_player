@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
   static Widget wrapped() {
     return MultiProvider(
       providers: [
-        VsyncProvider(),
+        const VsyncProvider(),
         DisposableProvider(
           create: (context) => PlayerAnimationManager(locator: context.read),
         ),
