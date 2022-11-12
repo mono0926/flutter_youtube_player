@@ -73,7 +73,7 @@ class _Home extends StatelessWidget {
           child: LayoutBuilder(
             builder: (context, constraints) {
               final aspectRatio = constraints.maxWidth / constraints.maxHeight;
-              return aspectRatio > _shrinkedAspectRatio - 0.1
+              return aspectRatio > _shrinkedAspectRatio - 0.2
                   ? const _VideoRow()
                   : Column(
                       children: [
