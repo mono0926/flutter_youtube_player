@@ -3,17 +3,17 @@ description: A new Flutter application.
 version: 1.0.0+1
 environment:
   sdk: ">=2.8.0-dev <3.0.0"
-  flutter: ">=1.14.6 <2.0.0"
+  flutter: ">=3.0.0 <4.0.0"
 dependencies:
-  flutter:
-    sdk: flutter
   cupertino_icons:
   disposable_provider:
+  flutter:
+    sdk: flutter
+  google_fonts:
   intl:
-  timeago:
   mono_kit:
   provider:
-  google_fonts:
+  timeago:
   touch_indicator:
   vsync_provider:
 dev_dependencies:
