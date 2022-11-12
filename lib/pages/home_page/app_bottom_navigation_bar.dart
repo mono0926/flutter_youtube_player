@@ -43,6 +43,7 @@ class AppBottomNavigationBar extends StatelessWidget {
             icon: Icon(Icons.video_library),
           ),
         ],
+        selectedFontSize: 12,
       ),
     );
   }
