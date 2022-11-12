@@ -10,14 +10,13 @@ class EpisodePlayer extends StatelessWidget {
   const EpisodePlayer({Key key}) : super(key: key);
 
   static const _margin = 8.0;
-  static const _bottomBarHeight = 48.0;
 
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final animation = context.watch<PlayerAnimationManager>();
     final shrinkedBottom =
-        mediaQuery.padding.bottom + _bottomBarHeight + _margin;
+        mediaQuery.padding.bottom + kBottomNavigationBarHeight + _margin;
     final shrinkedTop =
         mediaQuery.size.height - (shrinkedBottom + _shrinkedHeight);
     final topDistance = shrinkedTop - mediaQuery.padding.top;
