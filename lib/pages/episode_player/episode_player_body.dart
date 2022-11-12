@@ -65,8 +65,6 @@ class EpisodePlayerBody extends StatelessWidget {
             ),
             const Spacer(),
             TextButton(
-              // TODO(noboru-i): fix it later.
-              // textTheme: ButtonTextTheme.primary,
               child: const Text('SUBSCRIBE'),
               onPressed: () {},
             ),

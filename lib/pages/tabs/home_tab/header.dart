@@ -47,7 +47,11 @@ class _Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return TextButton(
+      style: TextButton.styleFrom(
+        foregroundColor: const Color(0xFF909090),
+      ),
       onPressed: onPressed ?? () {},
       child: Row(
         children: <Widget>[
