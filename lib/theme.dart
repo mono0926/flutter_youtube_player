@@ -29,7 +29,9 @@ ThemeData buildLightTheme(BuildContext context) {
         ),
         brightness: context.select(
           (ThemeNotifier theme) => theme.appBarBrightness,
-        ), toolbarTextStyle: appBartTextTheme.bodyText2, titleTextStyle: appBartTextTheme.headline6,
+        ),
+        toolbarTextStyle: appBartTextTheme.bodyText2,
+        titleTextStyle: appBartTextTheme.headline6,
       ),
       scaffoldBackgroundColor: const Color(0xFFF3F3F3),
       dividerColor: Colors.black38);
