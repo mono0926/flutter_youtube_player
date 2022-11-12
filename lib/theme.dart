@@ -24,13 +24,12 @@ ThemeData buildLightTheme(BuildContext context) {
   ).followLatestSpec().copyWith(
       appBarTheme: AppBarTheme(
         color: Colors.white,
-        textTheme: appBartTextTheme,
         iconTheme: const IconThemeData(
           color: Color(0xFF666666),
         ),
         brightness: context.select(
           (ThemeNotifier theme) => theme.appBarBrightness,
-        ),
+        ), toolbarTextStyle: appBartTextTheme.bodyText2, titleTextStyle: appBartTextTheme.headline6,
       ),
       scaffoldBackgroundColor: const Color(0xFFF3F3F3),
       dividerColor: Colors.black38);

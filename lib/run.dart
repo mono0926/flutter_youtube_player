@@ -3,7 +3,6 @@ import 'package:flutter_youtube_player/models/episode_notifier.dart';
 import 'package:provider/provider.dart';
 
 import 'app.dart';
-import 'router.dart';
 import 'theme.dart';
 
 void run() {

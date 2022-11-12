@@ -3,7 +3,6 @@ import 'package:mono_kit/mono_kit.dart';
 import 'package:provider/provider.dart';
 
 import 'pages/pages.dart';
-import 'router.dart';
 import 'theme.dart';
 
 class App extends StatelessWidget {

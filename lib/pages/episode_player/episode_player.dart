@@ -128,11 +128,11 @@ class _VideoRow extends StatelessWidget {
               ),
             ),
             IconButton(
-              icon: Icon(Icons.play_arrow),
+              icon: const Icon(Icons.play_arrow),
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.close),
+              icon: const Icon(Icons.close),
               onPressed: () {},
             )
           ],

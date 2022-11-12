@@ -15,7 +15,7 @@ class EpisodePlayerBody extends StatelessWidget {
           title: Text(episode.title),
           subtitle: EpisodeDescriptionText(episode: episode),
           trailing: IconButton(
-            icon: Icon(Icons.arrow_drop_down),
+            icon: const Icon(Icons.arrow_drop_down),
             onPressed: () {},
           ),
         ),
@@ -23,7 +23,7 @@ class EpisodePlayerBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             IconButton(
-              icon: Icon(Icons.thumb_up),
+              icon: const Icon(Icons.thumb_up),
               onPressed: () => Scaffold.of(context).showSnackBar(
                 const SnackBar(
                   content: Text('Pressed'),
@@ -31,19 +31,19 @@ class EpisodePlayerBody extends StatelessWidget {
               ),
             ),
             IconButton(
-              icon: Icon(Icons.thumb_down),
+              icon: const Icon(Icons.thumb_down),
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.share),
+              icon: const Icon(Icons.share),
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.cloud_download),
+              icon: const Icon(Icons.cloud_download),
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.save_alt),
+              icon: const Icon(Icons.save_alt),
               onPressed: () {},
             ),
           ],
@@ -128,7 +128,7 @@ class _EpisodeTile extends StatelessWidget {
               ),
             ),
             IconButton(
-              icon: Icon(Icons.more_vert),
+              icon: const Icon(Icons.more_vert),
               onPressed: () {},
             ),
           ],
