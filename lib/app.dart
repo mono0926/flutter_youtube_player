@@ -3,6 +3,7 @@ import 'package:mono_kit/mono_kit.dart';
 import 'package:provider/provider.dart';
 
 import 'pages/pages.dart';
+import 'router.dart' as router;
 import 'theme.dart';
 
 class App extends StatelessWidget {
@@ -16,7 +17,7 @@ class App extends StatelessWidget {
 //      themeMode: ThemeMode.dark,
       title: 'YouTube',
       home: HomePage.wrapped(),
-      onGenerateRoute: Provider.of<Router>(context).onGenerateRoute,
+      onGenerateRoute: Provider.of<router.Router>(context).onGenerateRoute,
       builder: (context, child) => TextScaleFactor(child: child),
     );
   }

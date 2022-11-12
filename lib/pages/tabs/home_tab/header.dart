@@ -47,7 +47,7 @@ class _Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
+    return TextButton(
       onPressed: onPressed ?? () {},
       child: Row(
         children: <Widget>[

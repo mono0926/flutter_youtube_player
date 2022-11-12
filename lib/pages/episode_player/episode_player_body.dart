@@ -24,7 +24,7 @@ class EpisodePlayerBody extends StatelessWidget {
           children: <Widget>[
             IconButton(
               icon: const Icon(Icons.thumb_up),
-              onPressed: () => Scaffold.of(context).showSnackBar(
+              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text('Pressed'),
                 ),
@@ -64,8 +64,9 @@ class EpisodePlayerBody extends StatelessWidget {
               ],
             ),
             const Spacer(),
-            FlatButton(
-              textTheme: ButtonTextTheme.primary,
+            TextButton(
+              // TODO(noboru-i): fix it later.
+              // textTheme: ButtonTextTheme.primary,
               child: const Text('SUBSCRIBE'),
               onPressed: () {},
             ),

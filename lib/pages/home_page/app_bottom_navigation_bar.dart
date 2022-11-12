@@ -23,25 +23,23 @@ class AppBottomNavigationBar extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(
-            label: Text('Home'),
+            label: 'Home',
             icon: Icon(Icons.home),
           ),
           BottomNavigationBarItem(
-            label: Text('Trending'),
+            label: 'Trending',
             icon: Icon(Icons.trending_up),
           ),
           BottomNavigationBarItem(
-            label: FittedBox(
-              child: Text('Subscriptions'),
-            ),
+            label: 'Subscriptions',
             icon: Icon(Icons.subscriptions),
           ),
           BottomNavigationBarItem(
-            label: Text('Inbox'),
+            label: 'Inbox',
             icon: Icon(Icons.mail),
           ),
           BottomNavigationBarItem(
-            label: Text('Library'),
+            label: 'Library',
             icon: Icon(Icons.video_library),
           ),
         ],
