@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mono_kit/mono_kit.dart';
 import 'package:provider/provider.dart';
@@ -22,19 +23,22 @@ ThemeData buildLightTheme(BuildContext context) {
       secondary: Colors.blueAccent,
     ),
   ).followLatestSpec().copyWith(
-      appBarTheme: AppBarTheme(
-        color: Colors.white,
-        iconTheme: const IconThemeData(
-          color: Color(0xFF666666),
+        appBarTheme: AppBarTheme(
+          color: Colors.white,
+          iconTheme: const IconThemeData(
+            color: Color(0xFF666666),
+          ),
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarBrightness: context.select(
+              (ThemeNotifier theme) => theme.statusBarBrightness,
+            ),
+          ),
+          toolbarTextStyle: appBartTextTheme.bodyText2,
+          titleTextStyle: appBartTextTheme.headline6,
         ),
-        brightness: context.select(
-          (ThemeNotifier theme) => theme.appBarBrightness,
-        ),
-        toolbarTextStyle: appBartTextTheme.bodyText2,
-        titleTextStyle: appBartTextTheme.headline6,
-      ),
-      scaffoldBackgroundColor: const Color(0xFFF3F3F3),
-      dividerColor: Colors.black38);
+        scaffoldBackgroundColor: const Color(0xFFF3F3F3),
+        dividerColor: Colors.black38,
+      );
 }
 
 // TODO(mono): 対応
@@ -48,8 +52,8 @@ ThemeData buildDarkTheme() {
 
 class ThemeNotifier with ChangeNotifier {
   var _appBarBrightness = Brightness.light;
-  Brightness get appBarBrightness => _appBarBrightness;
-  set appBarBrightness(Brightness brightness) {
+  Brightness get statusBarBrightness => _appBarBrightness;
+  set statusBarBrightness(Brightness brightness) {
     if (_appBarBrightness == brightness) {
       return;
     }

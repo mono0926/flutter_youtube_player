@@ -24,7 +24,7 @@ class PlayerAnimationManager implements Disposable {
     );
 
     _animationController.addListener(() {
-      locator<ThemeNotifier>().appBarBrightness =
+      locator<ThemeNotifier>().statusBarBrightness =
           _topFadeAnimation.value == 0 ? Brightness.light : Brightness.dark;
     });
   }

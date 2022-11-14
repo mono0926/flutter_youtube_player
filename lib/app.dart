@@ -7,7 +7,7 @@ import 'router.dart' as router;
 import 'theme.dart';
 
 class App extends StatelessWidget {
-  const App();
+  const App({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

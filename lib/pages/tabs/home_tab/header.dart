@@ -36,7 +36,7 @@ class _Button extends StatelessWidget {
     Key key,
     @required this.label,
     @required this.icon,
-    this.iconColor = const Color(0xFF909090),
+    this.iconColor = _textColor,
     this.onPressed,
   }) : super(key: key);
 
@@ -45,12 +45,13 @@ class _Button extends StatelessWidget {
   final Color iconColor;
   final VoidCallback onPressed;
 
+  static const _textColor = Color(0xFF909090);
+
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
     return TextButton(
       style: TextButton.styleFrom(
-        foregroundColor: const Color(0xFF909090),
+        foregroundColor: _textColor,
       ),
       onPressed: onPressed ?? () {},
       child: Row(

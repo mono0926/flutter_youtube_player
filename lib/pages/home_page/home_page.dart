@@ -94,6 +94,7 @@ class _FadeScreen extends StatelessWidget {
           ),
           FadeTransition(
             opacity: animation.animation.drive(_fadeTween),
+            // ignore: use_colored_box
             child: Container(color: Colors.black),
           ),
         ],

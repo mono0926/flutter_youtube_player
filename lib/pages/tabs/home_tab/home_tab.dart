@@ -21,9 +21,11 @@ class HomeTab extends StatelessWidget {
         logger.info(routeName);
         final pageBuilder = _routes[routeName];
         return routeName == RootPage.routeName
-            ? PageRouteBuilder<void>(pageBuilder: (context, a1, a2) {
-                return pageBuilder(context, settings);
-              })
+            ? PageRouteBuilder<void>(
+                pageBuilder: (context, a1, a2) {
+                  return pageBuilder(context, settings);
+                },
+              )
             : MaterialPageRoute<void>(
                 builder: (context) => pageBuilder(context, settings),
               );

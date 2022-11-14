@@ -444,7 +444,7 @@ packages:
     source: hosted
     version: "0.27.6"
   simple_logger:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: simple_logger
       url: "https://pub.dartlang.org"
