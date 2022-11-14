@@ -21,30 +21,29 @@ class AppBottomNavigationBar extends StatelessWidget {
             context.select((HomePageState state) => state.currentIndex),
         onTap: (index) => context.read<HomePageState>().currentIndex = index,
         type: BottomNavigationBarType.fixed,
-        items: [
+        items: const [
           BottomNavigationBarItem(
-            title: const Text('Home'),
+            label: 'Home',
             icon: Icon(Icons.home),
           ),
           BottomNavigationBarItem(
-            title: const Text('Trending'),
+            label: 'Trending',
             icon: Icon(Icons.trending_up),
           ),
           BottomNavigationBarItem(
-            title: const FittedBox(
-              child: Text('Subscriptions'),
-            ),
+            label: 'Subscriptions',
             icon: Icon(Icons.subscriptions),
           ),
           BottomNavigationBarItem(
-            title: const Text('Inbox'),
+            label: 'Inbox',
             icon: Icon(Icons.mail),
           ),
           BottomNavigationBarItem(
-            title: const Text('Library'),
+            label: 'Library',
             icon: Icon(Icons.video_library),
           ),
         ],
+        selectedFontSize: 12,
       ),
     );
   }

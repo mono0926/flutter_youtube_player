@@ -33,7 +33,7 @@ class EpisodeCard extends StatelessWidget {
                 ),
               ),
               IconButton(
-                icon: Icon(Icons.more_vert),
+                icon: const Icon(Icons.more_vert),
                 onPressed: () {},
               ),
             ],

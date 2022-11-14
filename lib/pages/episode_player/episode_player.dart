@@ -10,14 +10,13 @@ class EpisodePlayer extends StatelessWidget {
   const EpisodePlayer({Key key}) : super(key: key);
 
   static const _margin = 8.0;
-  static const _bottomBarHeight = 48.0;
 
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final animation = context.watch<PlayerAnimationManager>();
     final shrinkedBottom =
-        mediaQuery.padding.bottom + _bottomBarHeight + _margin;
+        mediaQuery.padding.bottom + kBottomNavigationBarHeight + _margin;
     final shrinkedTop =
         mediaQuery.size.height - (shrinkedBottom + _shrinkedHeight);
     final topDistance = shrinkedTop - mediaQuery.padding.top;
@@ -73,7 +72,7 @@ class _Home extends StatelessWidget {
           child: LayoutBuilder(
             builder: (context, constraints) {
               final aspectRatio = constraints.maxWidth / constraints.maxHeight;
-              return aspectRatio > _shrinkedAspectRatio - 0.1
+              return aspectRatio > _shrinkedAspectRatio - 0.2
                   ? const _VideoRow()
                   : Column(
                       children: [
@@ -128,11 +127,11 @@ class _VideoRow extends StatelessWidget {
               ),
             ),
             IconButton(
-              icon: Icon(Icons.play_arrow),
+              icon: const Icon(Icons.play_arrow),
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.close),
+              icon: const Icon(Icons.close),
               onPressed: () {},
             )
           ],

@@ -17,15 +17,15 @@ class RootPage extends StatelessWidget {
         title: const _Title(),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.cast),
+            icon: const Icon(Icons.cast),
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(Icons.videocam),
+            icon: const Icon(Icons.videocam),
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: () {},
           ),
           const _ProfileIconButton(),
